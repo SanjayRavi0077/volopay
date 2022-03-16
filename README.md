@@ -4,7 +4,7 @@
 
   * Node v16.5.0
 
-## Steps to edit the codebase
+## Steps to run the application
 
   * To install dependencies
   
@@ -21,4 +21,9 @@
     ```node.js
     yarn run android
     ```
+## To build the application
+   
+   ```node.js
+   yarn run build
+   ```
     
