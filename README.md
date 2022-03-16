@@ -2,7 +2,7 @@
 
 ## Pre-Requisites
 
-  * Node v16.14.0
+  * Node v16.5.0
 
 ## Steps to edit the codebase
 
