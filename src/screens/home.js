@@ -14,8 +14,6 @@ const Home = ({navigation}) => {
   const gifData = useSelector(state => state.gifData);
   const dispatch = useDispatch();
 
-  console.log(gifData);
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
