@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import colors from '../assets/colors';
 import {useNavigation} from '@react-navigation/native';
 
-const ITEM_HEIGHT = 100;
+const ITEM_HEIGHT = 150;
 
 const List = ({gifData, pagination}) => {
   const navigation = useNavigation();
@@ -43,10 +43,9 @@ const List = ({gifData, pagination}) => {
         data={gifData.data}
         renderItem={FlatListItem}
         numColumns={2}
-        onEndReachedThreshold={10}
+        onEndReachedThreshold={4}
         onEndReached={pagination}
         getItemLayout={getItemLayout}
-        windowSize={5}
         removeClippedSubviews={false}
       />
     </React.Fragment>

@@ -18,19 +18,6 @@ const GifDetail = ({route, navigation}) => {
   const {index} = route.params;
   const gifData = useSelector(state => state.gifData.data[index]);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Pressable onPress={() => navigation.navigate('Search')}>
-          <Image
-            style={styles.searchIcon}
-            source={require('../assets/icons/search.png')}
-          />
-        </Pressable>
-      ),
-    });
-  }, [navigation]);
-
   return (
     <SafeAreaView style={styles.container}>
       <FastImage

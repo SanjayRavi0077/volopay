@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
   },
   searchIcon: {
-    height: 20,
-    width: 20,
+    height: 24,
+    width: 24,
   },
 });
 
