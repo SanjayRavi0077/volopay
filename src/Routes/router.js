@@ -18,12 +18,13 @@ const Router = () => {
           headerShadowVisible: false,
           headerStyle: {backgroundColor: colors.black},
           headerTintColor: colors.white,
+          headerTitleStyle: {fontFamily: 'Poppins-Black', fontSize: 20},
         }}>
         <Stack.Screen
           name="Home"
           component={home}
           options={{
-            headerTitle: 'Giphy',
+            headerTitle: 'GIPHY',
           }}
         />
         <Stack.Screen

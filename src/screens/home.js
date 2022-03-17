@@ -1,18 +1,32 @@
-import React, {useEffect, useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Pressable, Image} from 'react-native';
 import colors from '../assets/colors';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchTrending, setLoading} from '../redux/action/actionGif';
-import List from '../components/List';
+import {
+  fetchTrending,
+  fetchTrendingRefresh,
+  setLoading,
+  setRefresh,
+} from '../redux/action/actionGif';
+import {List} from '../components/List';
 
 const Home = ({navigation}) => {
   const gifData = useSelector(state => state.gifData);
   const dispatch = useDispatch();
 
+  console.log(gifData);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Pressable onPress={() => navigation.navigate('Search')}>
+        <Pressable
+          onPress={() => navigation.navigate('Search')}
+          style={{
+            height: 24,
+            width: 24,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
           <Image
             style={styles.searchIcon}
             source={require('../assets/icons/search.png')}
@@ -23,9 +37,17 @@ const Home = ({navigation}) => {
   }, [navigation]);
 
   useEffect(() => {
-    dispatch(setLoading);
-    dispatch(fetchTrending(0, 10));
+    dispatch(setLoading());
+    dispatch(fetchTrending(0, 50));
   }, []);
+
+  const onRefresh = () => {
+    if (!gifData.loading && gifData.pagination.offset !== 0) {
+      dispatch(setRefresh());
+      dispatch(setLoading());
+      dispatch(fetchTrendingRefresh(0, 50));
+    }
+  };
 
   const pagination = () => {
     if (!gifData.loading) {
@@ -36,11 +58,7 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <List
-        gifData={gifData}
-        pagination={pagination}
-        naviagation={{navigation}}
-      />
+      <List gifData={gifData} pagination={pagination} onRefresh={onRefresh} />
     </SafeAreaView>
   );
 };

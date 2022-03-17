@@ -12,6 +12,20 @@ export const fetchTrending = (offset, limit) => async dispatch => {
   }
 };
 
+export const fetchTrendingRefresh = (offset, limit) => async dispatch => {
+  try {
+    const response = await getGif.get(
+      `/trending?limit=${limit}&rating=g&offset=${offset}`,
+    );
+    dispatch({type: ActionTypes.SET_DATA_REFRESH, payload: response.data});
+  } catch (err) {
+    console.error(err);
+  }
+};
+export const setRefresh = () => {
+  return {type: ActionTypes.SET_REFRESH};
+};
+
 export const setLoading = () => {
   return {type: ActionTypes.SET_LOADING};
 };

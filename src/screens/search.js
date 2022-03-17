@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import colors from '../assets/colors';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -8,7 +8,7 @@ import {
   searchGif,
   setSearchLoading,
 } from '../redux/action/actionGif';
-import List from '../components/List';
+import {List} from '../components/List';
 import SearchBar from '../components/SearchBar';
 
 const Search = ({navigation}) => {
@@ -36,17 +36,15 @@ const Search = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <SearchBar
-        navigation={navigation}
         onChangeText={onHandleText}
         onClear={onHandleClear}
         value={query}
       />
+      {query !== '' && gifData.data.length == 0 && (
+        <Text style={styles.noResult}>No Results found</Text>
+      )}
       {gifData.data.length != 0 && (
-        <List
-          gifData={gifData}
-          pagination={pagination}
-          naviagation={navigation}
-        />
+        <List gifData={gifData} pagination={pagination} />
       )}
     </SafeAreaView>
   );
@@ -62,6 +60,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 16,
+  },
+  noResult: {
+    color: colors.white,
+    fontFamily: 'Poppins-Regular',
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
   },
 });
 

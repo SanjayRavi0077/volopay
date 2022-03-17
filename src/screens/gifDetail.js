@@ -93,10 +93,12 @@ const styles = StyleSheet.create({
   displayName: {
     color: colors.white,
     fontSize: 16,
+    fontFamily: 'Poppins-SemiBold',
   },
   userName: {
     color: colors.white,
     fontSize: 12,
+    fontFamily: 'Poppins-Medium',
   },
 });
 

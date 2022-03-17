@@ -1,12 +1,12 @@
-import React, {useCallback, useState} from 'react';
-import {FlatList, StyleSheet, Pressable, TouchableOpacity} from 'react-native';
+import React, {useCallback} from 'react';
+import {FlatList, StyleSheet, Pressable} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import colors from '../assets/colors';
 import {useNavigation} from '@react-navigation/native';
 
-const ITEM_HEIGHT = 150;
+const ITEM_HEIGHT = 144;
 
-const List = ({gifData, pagination}) => {
+export const List = ({gifData, pagination, onRefresh}) => {
   const navigation = useNavigation();
 
   const getItemLayout = useCallback(
@@ -17,12 +17,13 @@ const List = ({gifData, pagination}) => {
     }),
     [],
   );
+  const getKey = useCallback(item => item.id, []);
 
-  const navigateToDetail = index => {
+  const navigateToDetail = useCallback(index => {
     navigation.navigate('Details', {
       index,
     });
-  };
+  }, []);
 
   const FlatListItem = ({item, index}) => {
     return (
@@ -47,6 +48,11 @@ const List = ({gifData, pagination}) => {
         onEndReached={pagination}
         getItemLayout={getItemLayout}
         removeClippedSubviews={false}
+        keyExtractor={getKey}
+        initialNumToRender={15}
+        windowSize={5}
+        refreshing={gifData.refresh}
+        onRefresh={onRefresh}
       />
     </React.Fragment>
   );
