@@ -26,4 +26,5 @@
    ```node.js
    yarn run build
    ```
-    
+   
+   Apk file will be generated inside .\android\app\build\outputs\apk
